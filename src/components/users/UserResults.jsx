@@ -38,7 +38,7 @@ function UserResults() {
       </div>
     );
   }
-  return Spinner;
+  return <Spinner />;
 }
 
 export default UserResults;
