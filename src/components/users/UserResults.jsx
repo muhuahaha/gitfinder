@@ -1,33 +1,16 @@
 /* eslint-disable no-use-before-define */
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import UserItem from './UserItem';
+import GithubContext from '../../context/github/GithubContext';
 
 import Spinner from '../layout/Spinner';
 
 function UserResults() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { users, loading } = useContext(GithubContext);
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = async () => {
-    const userUrl = `${import.meta.env.VITE_API_URL}/users`;
-    const accessToken = `${import.meta.env.VITE_API_GITHUB_TOKEN}`;
-
-    const response = await fetch(userUrl, {
-      headers: {
-        Authorization: `token ${accessToken}`,
-      },
-    });
-
-    const data = await response.json();
-    console.log(data);
-
-    setUsers(data);
-    setLoading(false);
-  };
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, []);
 
   if (!loading) {
     return (
@@ -38,7 +21,7 @@ function UserResults() {
       </div>
     );
   }
-  return Spinner;
+  return <Spinner />;
 }
 
 export default UserResults;
