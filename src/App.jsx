@@ -4,7 +4,6 @@ import Home from './pages/Home';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 import Navbar from './components/layout/Navbar';
-
 import Footer from './components/layout/Footer';
 
 function App() {

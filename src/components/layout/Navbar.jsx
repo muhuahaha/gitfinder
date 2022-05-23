@@ -1,7 +1,9 @@
-import { FaGithub, FaShoppingBasket } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+
+import { CartIcon, Testing } from './assets/icons';
 
 function Navbar({ title }) {
   const { amount } = useSelector((store) => store.cart);
@@ -29,7 +31,8 @@ function Navbar({ title }) {
             <Link to="/about" className="btn btn-ghost btn-sm rounded-btn">
               About
             </Link>
-            <FaShoppingBasket />
+            <CartIcon />
+            <Testing />
             <h1>{count}</h1>
             <h2 className="px-4">{amount}</h2>
           </div>
