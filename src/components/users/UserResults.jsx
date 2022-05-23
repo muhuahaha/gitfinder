@@ -8,9 +8,7 @@ import Spinner from '../layout/Spinner';
 function UserResults() {
   const { users, loading } = useContext(GithubContext);
 
-  // useEffect(() => {
-  //   fetchUsers();
-  // }, []);
+  console.log(users, 'users UserResult');
 
   if (!loading) {
     return (

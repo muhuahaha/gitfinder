@@ -1,5 +1,7 @@
 /* eslint-disable no-use-before-define */
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer, useMemo } from 'react';
+import PropTypes from 'prop-types';
+
 import githubReducer from './GithubReducer';
 
 const GithubContext = createContext('github');
@@ -18,36 +20,40 @@ export const GithubProvider = ({ children }) => {
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
   // Get initial users (test purposes)
-  const fetchUsers = async () => {
+  const searchUsers = async (text) => {
     setLoading();
-    const response = await fetch(`${GITHUB_URL}/users`, {
+
+    const params = new URLSearchParams({ q: text });
+    const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
       headers: {
         Authorization: `token ${GITHUB_TOKEN}`,
       },
     });
 
-    const data = await response.json();
+    console.log(response, 'response');
+
+    const { items } = await response.json();
 
     dispatch({
       type: 'GET_USERS',
-      payload: data,
+      payload: items,
     });
   };
 
   // Set Loading
   const setLoading = () => dispatch({ type: 'SET_LOADING' });
 
-  return (
-    <GithubContext.Provider
-      value={{
-        users: state.users,
-        loading: state.loading,
-        fetchUsers,
-      }}
-    >
-      {children}
-    </GithubContext.Provider>
-  );
+  const value = useMemo(() => ({
+    users: state.users,
+    loading: state.loading,
+    searchUsers,
+  }));
+
+  return <GithubContext.Provider value={value}>{children}</GithubContext.Provider>;
+};
+
+GithubProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default GithubContext;
