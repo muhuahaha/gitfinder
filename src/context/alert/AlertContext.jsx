@@ -1,4 +1,5 @@
 import { createContext, useReducer } from 'react';
+import PropTypes from 'prop-types';
 import alertReducer from './AlertReducer';
 
 const AlertContext = createContext();
@@ -18,7 +19,16 @@ export const AlertProvider = ({ children }) => {
     setTimeout(() => dispatch({ type: 'REMOVE_ALERT' }), 3000);
   };
 
-  return <AlertContext.Provider value={{ alert: state, setAlert }}>{children}</AlertContext.Provider>;
+  const value = {
+    state,
+    setAlert,
+  };
+
+  return <AlertContext.Provider value={value}>{children}</AlertContext.Provider>;
+};
+
+AlertProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default AlertContext;

@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable no-use-before-define */
-import { createContext, useReducer, useMemo } from 'react';
+import { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
 import githubReducer from './GithubReducer';
@@ -16,10 +17,10 @@ export const GithubProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
-  const value = useMemo(() => ({
+  const value = {
     ...state,
     dispatch,
-  }));
+  };
 
   return <GithubContext.Provider value={value}>{children}</GithubContext.Provider>;
 };

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa';
 import { useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
@@ -21,7 +22,7 @@ function User() {
       dispatch({ type: 'GET_REPOS', payload: userRepoData });
     };
     getUserData();
-  }, []);
+  }, [dispatch, params.login]);
 
   const {
     name,
