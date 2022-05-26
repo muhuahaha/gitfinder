@@ -20,7 +20,7 @@ export const AlertProvider = ({ children }) => {
   };
 
   const value = {
-    state,
+    alert: state,
     setAlert,
   };
 
