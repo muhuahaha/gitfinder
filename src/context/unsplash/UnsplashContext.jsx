@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable no-use-before-define */
 import { createContext, useReducer } from 'react';
 import UnsplashReducer from './UnsplashReducer';
@@ -10,6 +11,7 @@ const UNSPLASH_TOKEN = `${import.meta.env.VITE_API_UNSPLASH_TOKEN}`;
 export const UnsplashProvider = ({ children }) => {
   const initialState = {
     photos: [],
+    user: {},
     loading: false,
   };
 
@@ -17,16 +19,15 @@ export const UnsplashProvider = ({ children }) => {
 
   // Get search Results
   const searchPhotos = async (text) => {
-    // eslint-disable-next-line no-use-before-define
-
     setLoading();
     const params = new URLSearchParams({
       query: text,
-      per_page: 10,
-      order_by: 'popular',
+      count: 10,
+      // per_page: 10,
+      // order_by: 'popular',
       // orientation: 'landscape',
     });
-    const response = await fetch(`${UNSPLASH_URL}/search/photos?${params}`, {
+    const response = await fetch(`${UNSPLASH_URL}/photos/random?${params}`, {
       headers: {
         Authorization: `Client-ID ${UNSPLASH_TOKEN}`,
       },
@@ -34,9 +35,32 @@ export const UnsplashProvider = ({ children }) => {
 
     console.log(response, 'response');
 
-    const { results } = await response.json();
+    const data = await response.json();
+    dispatch({ type: 'GET_PHOTOS', payload: data });
+  };
 
-    dispatch({ type: 'GET_PHOTOS', payload: results });
+  // Get search Results
+  const getUser = async (login) => {
+    setLoading();
+    console.log(login, 'lloooooggg');
+
+    const response = await fetch(`${UNSPLASH_URL}/users/${login}`, {
+      headers: {
+        Authorization: `Client-ID ${UNSPLASH_TOKEN}`,
+      },
+    });
+
+    console.log(response, 're');
+
+    if (response.status === 404) {
+      console.log('404');
+      // window.location = '/notfound';
+    } else {
+      console.log(response, 'response');
+
+      const data = await response.json();
+      dispatch({ type: 'GET_USER', payload: data });
+    }
   };
 
   const clearPhotos = () => dispatch({ type: 'CLEAR_PHOTOS' });
@@ -46,8 +70,9 @@ export const UnsplashProvider = ({ children }) => {
   const setLoading = () => dispatch({ type: 'SET_LOADING' });
 
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <UnsplashContext.Provider value={{ photos: state.photos, loading: state.loading, searchPhotos, clearPhotos }}>
+    <UnsplashContext.Provider
+      value={{ photos: state.photos, loading: state.loading, user: state.user, searchPhotos, clearPhotos, getUser }}
+    >
       {children}
     </UnsplashContext.Provider>
   );

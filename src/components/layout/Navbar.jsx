@@ -23,6 +23,9 @@ function Navbar({ title }) {
             <Link to="/about" className="btn btn-ghost btn-sm rounded-btn">
               About
             </Link>
+            <Link to="/tailwind" className="btn btn-ghost btn-sm rounded-btn">
+              Tailwind
+            </Link>
           </div>
         </div>
       </nav>

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function PhotoItem({ photo: { urls, user, tags } }) {
+  console.log(user, 'user');
   return (
     <div>
       {' '}
@@ -11,11 +13,17 @@ function PhotoItem({ photo: { urls, user, tags } }) {
           <img src={user.profile_image.medium} alt="Profile" />
         </div>
       </div>
-      <h1 className="p-4">{user.name}</h1>
-      <div className="p-4">
+      <h1 className="p-4">{user.username}</h1>
+      {/* <div className="p-4">
         {tags.map((tag) => (
           <p>{tag.title}</p>
         ))}
+      </div> */}
+      <div>
+        {' '}
+        <Link className="text-base-content text-opacity-40" to={`/unsplashuser/${user.username}`}>
+          Visit Profile
+        </Link>
       </div>
     </div>
   );
