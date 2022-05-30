@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 const Box = forwardRef(({ children }, ref) => (
-  <div className="box bg-pink-600 m-10" ref={ref}>
+  <div className="box m-10 bg-pink-600" ref={ref}>
     {children}
   </div>
 ));

@@ -5,7 +5,7 @@ module.exports = {
       sm: '480px',
       md: '768px',
       lg: '976px',
-      xl: '1440px',
+      xl: '1440px'
     },
     extend: {
       colors: {
@@ -16,9 +16,9 @@ module.exports = {
         darkGrayishBlue: 'hsl(227, 12%, 61%)',
         veryDarkBlue: 'hsl(233, 12%, 13%)',
         veryPaleRed: 'hsl(13, 100%, 96%)',
-        veryLightGray: 'hsl(0, 0%, 98%)',
-      },
-    },
+        veryLightGray: 'hsl(0, 0%, 98%)'
+      }
+    }
   },
   tailwindConfig: './styles/tailwind.config.js',
 
@@ -33,6 +33,7 @@ module.exports = {
     logs: true,
     rtl: false,
     prefix: '',
-    darkTheme: 'cyberpunk',
-  },
+    darkTheme: 'cyberpunk'
+  }
 };
+

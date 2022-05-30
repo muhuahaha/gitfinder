@@ -10,13 +10,18 @@ const FadeIn = forwardRef(({ children, stagger = 0, x = 0 }, ref) => {
       el.current.children,
       {
         opacity: 0,
-        x,
+        x
       },
       {
         opacity: 1,
-        stagger,
-
         x: 0,
+        stagger: {
+          // wrap advanced options in an object
+          each: 0.1,
+          from: 'random',
+          grid: 'auto',
+          ease: 'power2.inOut'
+        }
       }
     );
   }, []);
@@ -31,7 +36,7 @@ const FadeIn = forwardRef(({ children, stagger = 0, x = 0 }, ref) => {
   }, [ref]);
 
   return (
-    <div className="flex flex-col space-y-4" ref={el}>
+    <div className="grid grid-cols-6 gap-2" ref={el}>
       {children}
     </div>
   );
