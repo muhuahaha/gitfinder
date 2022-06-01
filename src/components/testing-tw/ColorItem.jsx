@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ColorItem = forwardRef(({ color }, ref) => (
   <div
-    className={`bg-${color}-200 h-10 first:col-span-3 last:col-span-2 hover:bg-green-300`}
+    className={`bg-${color}-200 first:col-span-3 last:col-span-2 hover:scale-105 hover:bg-green-300`}
     ref={ref}>
     <h2>{color}</h2>
   </div>

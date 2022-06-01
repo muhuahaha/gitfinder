@@ -7,9 +7,9 @@ function PhotoItem({ photo: { urls, user, tags } }) {
   return (
     <div>
       {' '}
-      <img className="rounded-lg p-4 break-inside" src={urls.small} alt="" />
+      <img className="break-inside rounded-lg p-4" src={urls.small} alt="" />
       <div className="avatar p-4">
-        <div className="rounded-full shadow w-14 h-14">
+        <div className="h-14 w-14 rounded-full shadow">
           <img src={user.profile_image.medium} alt="Profile" />
         </div>
       </div>
